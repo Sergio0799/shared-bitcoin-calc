@@ -1,4 +1,4 @@
-# Bitcoin_calculator
+# Bitcoin_Calculator
 
 A new Flutter project.
 
