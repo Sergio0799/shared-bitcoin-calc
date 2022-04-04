@@ -1,8 +1,59 @@
 import 'package:test/test.dart';
 
+// Import exchange tools file
+import 'package:bitcoin_calculator/models/exchange_tools.dart';
+
 void main() {
-  test('2 plus 2 is 4', () {
-    int result = 2 + 2;
-    expect(result, 4);
+  group("USD to BTC conversion", () {
+    test("constructor should set amount of US Dollars based on user input", ()  {
+      // Variable represents the amount of US Dollars input
+      var USD = 45605.40;
+
+      // Initialize an instance of USDtoBTC class using the amount of USD input
+      final instance = USDtoBTC(USD);
+
+      // Expect amount given to constructor is stored in instance
+      expect(instance.amountUSD(), 45605.40);
+    });
+    
+
+    test("testing conversion function", () {
+      // Variable represents the amount of US Dollars input
+      var conversion = 45605.40;
+
+      // Initialize an instance of USDtoBTC class using the amount of USD input
+      final instance = USDtoBTC(conversion);
+
+      // Expect amount given to constructor is stored in instance
+      expect(instance.conversion(), 1.0);
+    });
+    
   });
+
+  group("BTC to USD conversion", () {
+    test("constructor should set amount of BTC based on user input", ()  {
+      // Variable represents the amount of US Dollars input
+      var BTC = 1.0;
+
+      // Initialize an instance of USDtoBTC class using the amount of USD input
+      final instance = BTCtoUSD(BTC);
+
+      // Expect amount given to constructor is stored in instance
+      expect(instance.amountBTC(),1.0 );
+    });
+    
+
+    test("testing conversion function", () {
+      // Variable represents the amount of US Dollars input
+      var conversion = 1.0;
+
+      // Initialize an instance of USDtoBTC class using the amount of USD input
+      final instance = BTCtoUSD(conversion);
+
+      // Expect amount given to constructor is stored in instance
+      expect(instance.conversion(),  45605.40);
+    });
+    
+  });
+
 }

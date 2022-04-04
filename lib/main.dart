@@ -1,67 +1,75 @@
 import 'package:flutter/material.dart';
 
+import 'package:bitcoin_calculator/models/exchange_tools.dart';
+import 'package:bitcoin_calculator/screens/USDtoBTC_input_screen.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Counter App',
-      home: MyHomePage(title: 'Counter App Home Page'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text('Crypto-Calc'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("USD to BTC",
+              key: Key("USDtoBTC-text"),
+              style: TextStyle(fontSize: 18, color: Color(0xFF4C7488))),
+          OutlinedButton(
+              key: Key('USDtoBTC-button'),
+              style: OutlinedButton.styleFrom(
+                  minimumSize: Size(280, 46),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16.0)
+                  )
+              ),
+              onPressed: () {
+                USDtoBTC instance;
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => InputUSDScreen(instance)));
+              },
+          ),
+          ElevatedButton(
+            key: Key("BTCtoUSD-button"),
+            child: Text(
+              "BTC to USD",
+              key: Key("BTCtoUSD-text"),
+              style: TextStyle(
+                fontSize: 18,
+                //color: Color(0xFF4C7488)
+              )
             ),
-            Text(
-              '$_counter',
-              // Provide a Key to this specific Text widget. This allows
-              // identifying the widget from inside the test suite,
-              // and reading the text.
-              key: Key('counter'),
-              style: Theme.of(context).textTheme.headline4,
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              fixedSize: Size(280, 46),
+              primary: Color(0xFF4C7488)
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        // Provide a Key to this button. This allows finding this
-        // specific button inside the test suite, and tapping it.
-        key: Key('increment'),
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
+            onPressed: () {
+              BTCtoUSD instance;
+
+              //Navigator.push(context, MaterialPageRoute(builder: (context) => InputUSDScreen(instance)));
+            },
+          )
+        ],
+      )),
     );
   }
 }
