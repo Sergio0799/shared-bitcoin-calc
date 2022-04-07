@@ -42,6 +42,8 @@ class BTCtoUSD {
   double conversion() {
     return _numBTC * _btcRate;
   }
+
+  // Output stored value for bitcoin
   double amountBTC() {
     return _numBTC;
   }

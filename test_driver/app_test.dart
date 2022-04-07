@@ -18,29 +18,26 @@ void main() {
     });
 
   group('Home Screen', () {
-    // First, define the Finders and use them to locate widgets from the test suite
     final USDtoBTCBtnFinder = find.byValueKey('USDtoBTC-button');
     final BTCtoUSDBtnFinder = find.byValueKey('BTCtoUSD-button');
 
     test('should go to USD-to-BTC screen when press button', () async {
       await driver.tap(USDtoBTCBtnFinder);
 
-      final findGoButtonText = find.byValueKey('USD-go-text');
+      final findConvertButtonText = find.byValueKey('USD-convert-text');
 
-      expect(await driver.getText(findGoButtonText), "GO");
+      expect(await driver.getText(findConvertButtonText), "Convert");
 
       final USDBackBtnFinder = find.byValueKey('USD-back-button');
       await driver.tap(USDBackBtnFinder);
     });
 
     test('should go to BTC-to-USD screen when press button', () async {
-      // First, tap the button.
       await driver.tap(BTCtoUSDBtnFinder);
 
-      // Then, verify the counter text is incremented by 1.
-      final findGoButtonText = find.byValueKey('BTC-go-text');
+      final findConvertButtonText = find.byValueKey('BTC-convert-text');
 
-      expect(await driver.getText(findGoButtonText), "GO");
+      expect(await driver.getText(findConvertButtonText), "Convert");
       
        
       final BTCBackBtnFinder = find.byValueKey('BTC-back-button');
@@ -50,20 +47,19 @@ void main() {
   });
   
   group('USD-to-BTC screen', () {
-    // First, define the Finders and use them to locate widgets from the test suite
     final USDtoBTCBtnFinder = find.byValueKey('USDtoBTC-button');
 
     test('should convert input USD value to BTC', () async {
       await driver.tap(USDtoBTCBtnFinder);
 
       final findUSDTextField = find.byValueKey('USD-textfield');
-      final goBtnFinder = find.byValueKey('USD-input-button');
+      final convertBtnFinder = find.byValueKey('USD-convert-button');
       
       await driver.tap(findUSDTextField);
       await driver.enterText('45605.4');
       await driver.waitFor(find.text('45605.4'));
       
-      await driver.tap(goBtnFinder);
+      await driver.tap(convertBtnFinder);
 
       final findOutputText = find.byValueKey('USDtoBTC-output');
       
@@ -72,26 +68,26 @@ void main() {
     
     test('should display error if user input is negative' , () async {
       final findUSDTextField = find.byValueKey('USD-textfield');
-      final goBtnFinder = find.byValueKey('USD-input-button');
+      final convertBtnFinder = find.byValueKey('USD-convert-button');
       
       await driver.tap(findUSDTextField);
       await driver.enterText('-5.0');
       await driver.waitFor(find.text('-5.0'));
       
-      await driver.tap(goBtnFinder);
+      await driver.tap(convertBtnFinder);
       
       await driver.waitFor(find.text("Invalid - Negative Number"));
     });
 
     test('should display error if user input is not a number' , () async {
       final findUSDTextField = find.byValueKey('USD-textfield');
-      final goBtnFinder = find.byValueKey('USD-input-button');
+      final convertBtnFinder = find.byValueKey('USD-convert-button');
       
       await driver.tap(findUSDTextField);
       await driver.enterText(',');
       await driver.waitFor(find.text(','));
       
-      await driver.tap(goBtnFinder);
+      await driver.tap(convertBtnFinder);
       
       await driver.waitFor(find.text("Invalid Input"));
     });
@@ -115,13 +111,13 @@ void main() {
       await driver.tap(BTCtoUSDBtnFinder);
 
       final findBTCTextField = find.byValueKey('BTC-textfield');
-      final goBtnFinder = find.byValueKey('BTC-input-button');
+      final convertBtnFinder = find.byValueKey('BTC-convert-button');
       
       await driver.tap(findBTCTextField);
       await driver.enterText('1');
       await driver.waitFor(find.text('1'));
 
-      await driver.tap(goBtnFinder);
+      await driver.tap(convertBtnFinder);
 
       final findOutputText = find.byValueKey('BTCtoUSD-output');
       
@@ -131,13 +127,13 @@ void main() {
     });
     test('should display error if user input is negative' , () async {
       final findBTCTextField = find.byValueKey('BTC-textfield');
-      final goBtnFinder = find.byValueKey('BTC-input-button');
+      final convertBtnFinder = find.byValueKey('BTC-convert-button');
       
       await driver.tap(findBTCTextField);
       await driver.enterText('-5.0');
       await driver.waitFor(find.text('-5.0'));
       
-      await driver.tap(goBtnFinder);
+      await driver.tap(convertBtnFinder);
 
       final findOutputText = find.byValueKey('BTCtoUSD-output');
       
@@ -147,13 +143,13 @@ void main() {
     
     test('should display error if user input is not a number' , () async {
       final findBTCTextField = find.byValueKey('BTC-textfield');
-      final goBtnFinder = find.byValueKey('BTC-input-button');
+      final convertBtnFinder = find.byValueKey('BTC-convert-button');
       
       await driver.tap(findBTCTextField);
       await driver.enterText(',');
       await driver.waitFor(find.text(','));
       
-      await driver.tap(goBtnFinder);
+      await driver.tap(convertBtnFinder);
       
       await driver.waitFor(find.text("Invalid Input"));
       

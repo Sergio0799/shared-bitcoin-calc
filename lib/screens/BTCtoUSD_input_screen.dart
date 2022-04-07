@@ -9,8 +9,12 @@ class InputBTCScreen extends StatefulWidget {
 }
 
 class _InputBTCScreen extends State<InputBTCScreen> {
+  //initialized all used variables:
+
+  //boolean vars for the changing state of widgets
   bool _input = false;
   bool _output = false;
+  //diaply and error vars to see valid input and error detection in user input
   double _display = 0.0;
   String errorMessage = "";
   bool errorDisplay = false;
@@ -39,22 +43,25 @@ class _InputBTCScreen extends State<InputBTCScreen> {
     return Scaffold(
       // Completely transparent AppBar has Back button in top left
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        centerTitle: true,
+        backgroundColor: Color(0xFFF2A900),
         elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_ios,
-            color: Color(0xFF4C748B),
+            color: Color(0xFF68A047),
             key: Key('BTC-back-button')
           ),
-          // Return to previous screen when Back button pressed, keeps context of Homebrew instance
+          // Return to previous screen when Back button pressed
           onPressed: () {
             Navigator.pop(context);
           },
         ),
+        title: Text('BTC to USD')
       ),
       body: Center(
         child: Column(
+          //Output for conversion widget
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Visibility(
@@ -64,11 +71,13 @@ class _InputBTCScreen extends State<InputBTCScreen> {
                 key: Key('BTCtoUSD-output'),
                 style: TextStyle(
                   fontSize: 28,
+                  color: Color(0xFF68A047)
                 )
               )
             ),
-            // Make space between
+            // Making space between
             SizedBox(height: 20),
+            //Container for BTC input 
             Container(
                 width: 337.0,
                 height: 48.0,
@@ -86,39 +95,39 @@ class _InputBTCScreen extends State<InputBTCScreen> {
                 )
               )
             ),
-            // Make space between
+            // Making space between 
             SizedBox(height: 20),
             ElevatedButton(
-              key: Key('BTC-input-button'),
+              key: Key('BTC-convert-button'),
               child: Text(
-                // Display "Continue" within button in Montserrat font, 14px
-                "GO",
-                key: Key('BTC-go-text'),
+                
+                "Convert",
+                key: Key('BTC-convert-text'),
                 style: TextStyle(
                   fontSize: 14,
-                  fontFamily: 'Montserrat'
+
                 )
               ),
-              // Style the button's border and size to match desired UI
+              // Style the button's border and size to match  UI
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
                 fixedSize: Size(200, 46),
-                primary: Color(0xFF4C748B)
+                primary: Color(0xFF68A047)
               ),
               // If user has made an input, then enable button. Otherwise disabled
               onPressed: _input? () {
                 setState(() {
                 try {
-                  // Convert string to int and check that user input a number that is within reason
+                  // Reads users response to determine its validity
                   double BTC = double.parse(inputTextController.text);
                   errorDisplay = false;
                   if(BTC >= 0) {
-                    // Store number of cups input in Homebrew instance
+                    // Store number of BTCtoUSD input 
                     BTCtoUSD BTCConversion = BTCtoUSD(BTC);
-                    //
+                    
                     _display = BTCConversion.conversion();
 
-                    //inputTextController.clear();
+                    
                     _output = true;
                   }
                   else {
