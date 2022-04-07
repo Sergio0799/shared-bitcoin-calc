@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:bitcoin_calculator/models/exchange_tools.dart';
 import 'package:bitcoin_calculator/screens/USDtoBTC_input_screen.dart';
+import 'package:bitcoin_calculator/screens/BTCtoUSD_input_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,24 +30,26 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text("USD to BTC",
+        children: 
+        [
+          
+          ElevatedButton(
+            key: Key("USDtoBTC-button"),
+            child: Text(
+              "USD to BTC",
               key: Key("USDtoBTC-text"),
-              style: TextStyle(fontSize: 18, color: Color(0xFF4C7488))),
-          OutlinedButton(
-              key: Key('USDtoBTC-button'),
-              style: OutlinedButton.styleFrom(
-                  minimumSize: Size(280, 46),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16.0)
-                  )
-              ),
-              onPressed: () {
-                USDtoBTC instance;
-
-                Navigator.push(context, MaterialPageRoute(builder: (context) => InputUSDScreen(instance)));
-              },
-          ),
+              style: TextStyle(
+                fontSize: 18,
+                //color: Color(0xFF4C7488)
+              )
+            ),
+            style: ElevatedButton.styleFrom(
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+              fixedSize: Size(280, 46),
+              primary: Color(0xFF4C7488)
+            ),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => InputBTCScreen()));}),
           ElevatedButton(
             key: Key("BTCtoUSD-button"),
             child: Text(
@@ -63,9 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
               primary: Color(0xFF4C7488)
             ),
             onPressed: () {
-              BTCtoUSD instance;
-
-              //Navigator.push(context, MaterialPageRoute(builder: (context) => InputUSDScreen(instance)));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => InputBTCScreen()));
             },
           )
         ],

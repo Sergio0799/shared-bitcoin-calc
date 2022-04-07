@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:bitcoin_calculator/models/exchange_tools.dart';
 import 'package:bitcoin_calculator/main.dart';
 
-class InputUSDScreen extends StatefulWidget {
+class InputBTCScreen extends StatefulWidget {
   @override
-  _InputUSDScreen createState() => _InputUSDScreen();
+  _InputBTCScreen createState() => _InputBTCScreen();
 }
 
-class _InputUSDScreen extends State<InputUSDScreen> {
+class _InputBTCScreen extends State<InputBTCScreen> {
   bool _input = false;
   double _display = 0.0;
   String errorMessage = "";
@@ -44,7 +44,7 @@ class _InputUSDScreen extends State<InputUSDScreen> {
           icon: Icon(
             Icons.arrow_back_ios,
             color: Color(0xFF4C748B),
-            key: Key('USD-back-button')
+            key: Key('BTC-back-button')
           ),
           // Return to previous screen when Back button pressed, keeps context of Homebrew instance
           onPressed: () {
@@ -60,41 +60,13 @@ class _InputUSDScreen extends State<InputUSDScreen> {
               visible: _input,
               child: Text(
                 _display.toString(),
-                key: Key('USDtoBTC-output'),
-
+                key: Key('BTCtoUSD-output'),
+                
               )
             ),
             Container(
-                width: 300.0,
-                height: 48.0,
-                decoration: BoxDecoration(
-                  border: Border.all(width: 2)
-                  
-                ),
-                
               child: TextField(
-                key: Key('USD-textfield'),
-                controller: inputTextController,
-                // When inputing, the keyboard will only display a numberpad
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(border: InputBorder.none),
-                
-              ),
-            ),
-            Container(
-              height: 48,
-              width: 337,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Color(0xFF4C748B),
-                  width: 2
-                ),
-                borderRadius: BorderRadius.circular(10)
-              ),
-              padding: EdgeInsets.all(10.0),
-              // TextField for user to input the number of cups of coffee they would like
-              child: TextField(
-                key: Key('cups-textfield'),
+                key: Key('BTC-textfield'),
                 controller: inputTextController,
                 // When inputing, the keyboard will only display a numberpad
                 keyboardType: TextInputType.number,
@@ -102,11 +74,11 @@ class _InputUSDScreen extends State<InputUSDScreen> {
               )
             ),
             ElevatedButton(
-              key: Key('USD-input-button'),
+              key: Key('BTC-input-button'),
               child: Text(
                 // Display "Continue" within button in Montserrat font, 14px
                 "GO",
-                key: Key('USD-go-text'),
+                key: Key('BTC-go-text'),
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: 'Montserrat'
@@ -122,12 +94,12 @@ class _InputUSDScreen extends State<InputUSDScreen> {
               onPressed: _input? () {
                 try {
                   // Convert string to int and check that user input a number that is within reason
-                  double usd = double.parse(inputTextController.text);
-                  if(usd > 0) {
+                  double BTC = double.parse(inputTextController.text);
+                  if(BTC > 0) {
                     // Store number of cups input in Homebrew instance
-                    BTCtoUSD usdConversion = BTCtoUSD(usd);
+                    BTCtoUSD BTCConversion = BTCtoUSD(BTC);
                     //
-                    _display = usdConversion.conversion();
+                    _display = BTCConversion.conversion();
                   }
                   else {
                     errorMessage = "Value is negative, invalid";
