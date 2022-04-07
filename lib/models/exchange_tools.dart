@@ -4,7 +4,12 @@ class USDtoBTC {
 
   // Constructor is initialized with amount of USD input
   USDtoBTC(double amount) {
-    _numUSD = amount;
+    if (amount >= 0) {
+      _numUSD = amount;
+    }
+    else {
+      throw ArgumentError();
+    }
   }
 
   // Output stored value for US Dollars
@@ -24,7 +29,13 @@ class BTCtoUSD {
 
   // Constructor is initialized with amount of BTC input
   BTCtoUSD(double amount) {
-    _numBTC = amount;
+    if (amount >= 0) {
+      _numBTC = amount;
+    }
+    else
+    {
+      throw ArgumentError();
+    }
   }
 
   // Conversion function returns amount of US Dollars

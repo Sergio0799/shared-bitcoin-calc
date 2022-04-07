@@ -10,6 +10,7 @@ class InputBTCScreen extends StatefulWidget {
 
 class _InputBTCScreen extends State<InputBTCScreen> {
   bool _input = false;
+  bool _output = false;
   double _display = 0.0;
   String errorMessage = "";
   bool errorDisplay = false;
@@ -57,22 +58,36 @@ class _InputBTCScreen extends State<InputBTCScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Visibility(
-              visible: _input,
+              visible: _output,
               child: Text(
                 _display.toString(),
                 key: Key('BTCtoUSD-output'),
-                
+                style: TextStyle(
+                  fontSize: 28,
+                )
               )
             ),
+            // Make space between
+            SizedBox(height: 20),
             Container(
+                width: 337.0,
+                height: 48.0,
+                decoration: BoxDecoration(
+                border: Border.all(width: 2)),
+
               child: TextField(
                 key: Key('BTC-textfield'),
                 controller: inputTextController,
                 // When inputing, the keyboard will only display a numberpad
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(border: InputBorder.none)
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  errorText: errorDisplay ? errorMessage : null
+                )
               )
             ),
+            // Make space between
+            SizedBox(height: 20),
             ElevatedButton(
               key: Key('BTC-input-button'),
               child: Text(
@@ -87,28 +102,36 @@ class _InputBTCScreen extends State<InputBTCScreen> {
               // Style the button's border and size to match desired UI
               style: ElevatedButton.styleFrom(
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                fixedSize: Size(280, 46),
+                fixedSize: Size(200, 46),
                 primary: Color(0xFF4C748B)
               ),
               // If user has made an input, then enable button. Otherwise disabled
               onPressed: _input? () {
+                setState(() {
                 try {
                   // Convert string to int and check that user input a number that is within reason
                   double BTC = double.parse(inputTextController.text);
-                  if(BTC > 0) {
+                  errorDisplay = false;
+                  if(BTC >= 0) {
                     // Store number of cups input in Homebrew instance
                     BTCtoUSD BTCConversion = BTCtoUSD(BTC);
                     //
                     _display = BTCConversion.conversion();
+
+                    //inputTextController.clear();
+                    _output = true;
                   }
                   else {
-                    errorMessage = "Value is negative, invalid";
+                    _output = false;
+                    errorMessage = "Invalid - Negative Number";
                     errorDisplay = true;
                   }
                 } catch (e) {
-                  errorMessage = "Value invalid";
+                  _output = false;
+                  errorMessage = "Invalid Input";
                   errorDisplay = true;
                 }
+                });
               } : null
             )
           ]

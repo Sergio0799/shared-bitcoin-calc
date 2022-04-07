@@ -27,6 +27,10 @@ void main() {
       // Expect amount given to constructor is stored in instance
       expect(instance.conversion(), 1.0);
     });
+
+    test('throws ArgumentError on negative number', () {
+      expect(() => USDtoBTC(-1), throwsArgumentError);
+    });
     
   });
 
@@ -40,6 +44,11 @@ void main() {
 
       // Expect amount given to constructor is stored in instance
       expect(instance.amountBTC(),1.0 );
+    });
+
+    
+    test('throws ArgumentError on negative number', () {
+      expect(() => BTCtoUSD(-1), throwsArgumentError);
     });
     
 

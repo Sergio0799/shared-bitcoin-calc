@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Crypto-Calc'),
+        title: Text('Crypto - Calc'),
       ),
       body: Center(
           child: Column(
@@ -40,16 +40,18 @@ class _MyHomePageState extends State<MyHomePage> {
               key: Key("USDtoBTC-text"),
               style: TextStyle(
                 fontSize: 18,
-                //color: Color(0xFF4C7488)
+                
               )
             ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              fixedSize: Size(280, 46),
+              fixedSize: Size(200, 46),
               primary: Color(0xFF4C7488)
             ),
             onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => InputBTCScreen()));}),
+              Navigator.push(context, MaterialPageRoute(builder: (context) => InputUSDScreen()));}),
+          // Make space between 
+            SizedBox(height: 20),
           ElevatedButton(
             key: Key("BTCtoUSD-button"),
             child: Text(
@@ -57,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
               key: Key("BTCtoUSD-text"),
               style: TextStyle(
                 fontSize: 18,
-                //color: Color(0xFF4C7488)
+                
               )
             ),
             style: ElevatedButton.styleFrom(
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
-              fixedSize: Size(280, 46),
+              fixedSize: Size(200, 46),
               primary: Color(0xFF4C7488)
             ),
             onPressed: () {
