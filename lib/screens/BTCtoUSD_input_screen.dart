@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-
 import 'package:bitcoin_calculator/models/exchange_tools.dart';
 import 'package:bitcoin_calculator/main.dart';
+import 'package:http/http.dart' as http;
+import 'package:bitcoin_calculator/models/utils/conversionAPI.dart';
+import 'package:bitcoin_calculator/config/globals.dart';
 
 class InputBTCScreen extends StatefulWidget {
   @override
@@ -18,6 +20,8 @@ class _InputBTCScreen extends State<InputBTCScreen> {
   double _display = 0.0;
   String errorMessage = "";
   bool errorDisplay = false;
+  Future<double> futureConversion;
+  
   
   // Initialize text controller
   final inputTextController = TextEditingController();
@@ -29,6 +33,7 @@ class _InputBTCScreen extends State<InputBTCScreen> {
       final input = inputTextController.text.isNotEmpty;
       setState(() => this._input = input);
     });
+    futureConversion = BitcoinAPI.fetchConversion(httpClient);
   }
 
   // Stop listening for controller when disposed
@@ -39,6 +44,8 @@ class _InputBTCScreen extends State<InputBTCScreen> {
   }
 
   @override
+  
+  
   Widget build(BuildContext context) {
     return Scaffold(
       // Completely transparent AppBar has Back button in top left
@@ -124,9 +131,13 @@ class _InputBTCScreen extends State<InputBTCScreen> {
                   if(BTC >= 0) {
                     // Store number of BTCtoUSD input 
                     BTCtoUSD BTCConversion = BTCtoUSD(BTC);
-                    
-                    _display = BTCConversion.conversion();
 
+                    futureConversion.then((double conversionRate) {
+                      _display = BTCConversion.conversion(conversionRate);
+                    }).catchError((e) {
+                      errorMessage = "Couldn't retrieve current exchange rate";
+                      errorDisplay = true;
+                    });
                     
                     _output = true;
                   }

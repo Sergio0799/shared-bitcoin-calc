@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 // Import the next two possible screens
 import 'package:bitcoin_calculator/screens/USDtoBTC_input_screen.dart';
 import 'package:bitcoin_calculator/screens/BTCtoUSD_input_screen.dart';
+import 'package:bitcoin_calculator/config/globals.dart';
+import 'package:bitcoin_calculator/models/utils/conversionAPI.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,12 +17,24 @@ class MyApp extends StatelessWidget {
   }
 }
 
+
+
+
 class MyHomePage extends StatefulWidget {
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  Future<String> futureConversion;
+
+  @override
+  void initState() {
+    super.initState();
+    futureConversion = BitcoinAPI.fetchDisplay(httpClient);
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            FutureBuilder<String>(
+              future: futureConversion,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  String rate = snapshot.data;
+                  return Text(rate, key: Key("joke-text"));
+                } else if (snapshot.hasError) {
+                  return Text("${snapshot.error}");
+                }}),
           // Button for user to go to USD to BTC converter
           ElevatedButton(
             key: Key("USDtoBTC-button"),

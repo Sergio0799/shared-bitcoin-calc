@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 // Import exchange tools classes package
 import 'package:bitcoin_calculator/models/exchange_tools.dart';
+import 'package:bitcoin_calculator/models/utils/conversionAPI.dart';
+import 'package:bitcoin_calculator/config/globals.dart';
 
 class InputUSDScreen extends StatefulWidget {
   @override
@@ -18,6 +20,7 @@ class _InputUSDScreen extends State<InputUSDScreen> {
   // Variables to toggle error message displays
   String errorMessage = "";
   bool errorDisplay = false;
+  Future<double> futureConversion;
   
   // Initialize text controller
   final inputTextController = TextEditingController();
@@ -28,6 +31,7 @@ class _InputUSDScreen extends State<InputUSDScreen> {
     inputTextController.addListener(() {
       final input = inputTextController.text.isNotEmpty;
       setState(() => this._input = input);
+      futureConversion = BitcoinAPI.fetchConversion(httpClient);
     });
   }
 
@@ -124,8 +128,16 @@ class _InputUSDScreen extends State<InputUSDScreen> {
                   if(usd >= 0) {
                     // Pass input USD to converter constructor
                     USDtoBTC usdConversion = USDtoBTC(usd);
+
+                    futureConversion.then((double conversionRate) {
+                      _display = usdConversion.conversion(conversionRate);
+                    }).catchError((e) {
+                      errorMessage = "Couldn't retrieve current exchange rate";
+                      errorDisplay = true;
+                    });
+
+
                     // Set display text to calculated BTC conversion
-                    _display = usdConversion.conversion();
                     _output = true;
 
                     //inputTextController.clear();
