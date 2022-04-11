@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 // Import the next two possible screens
 import 'package:bitcoin_calculator/screens/USDtoBTC_input_screen.dart';
 import 'package:bitcoin_calculator/screens/BTCtoUSD_input_screen.dart';
+
 import 'package:bitcoin_calculator/config/globals.dart';
 import 'package:bitcoin_calculator/models/utils/conversionAPI.dart';
 
@@ -16,8 +17,6 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
 
 
 class MyHomePage extends StatefulWidget {
@@ -34,7 +33,6 @@ class _MyHomePageState extends State<MyHomePage> {
     //futureConversion = BitcoinAPI.fetchDisplay(httpClient);
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,6 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            ////---Widget used to display current conversion rate as text on screen---////
             // FutureBuilder<String>(
             //   future: futureConversion,
             //   builder: (context, snapshot) {

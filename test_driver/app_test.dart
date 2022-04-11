@@ -156,7 +156,6 @@ void main() {
     });
 
   test('return to home screen with current screen back button', () async{
-
     final BTCtoUSDBtnFinder = find.byValueKey('BTC-back-button');
 
     await driver.tap(BTCtoUSDBtnFinder);

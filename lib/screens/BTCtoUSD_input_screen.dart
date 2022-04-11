@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+
+// Import exchange tools and API classes packages
 import 'package:bitcoin_calculator/models/exchange_tools.dart';
-import 'package:bitcoin_calculator/main.dart';
-import 'package:http/http.dart' as http;
 import 'package:bitcoin_calculator/models/utils/conversionAPI.dart';
 import 'package:bitcoin_calculator/config/globals.dart';
 
@@ -11,12 +11,11 @@ class InputBTCScreen extends StatefulWidget {
 }
 
 class _InputBTCScreen extends State<InputBTCScreen> {
-  //initialized all used variables:
-
-  //boolean vars for the changing state of widgets
+  // Initialized all used variables:
+  // booleans for the changing state of widgets
   bool _input = false;
   bool _output = false;
-  //diaply and error vars to see valid input and error detection in user input
+  // diaply and error vars to see valid input and error detection in user input
   double _display = 0.0;
   String errorMessage = "";
   bool errorDisplay = false;

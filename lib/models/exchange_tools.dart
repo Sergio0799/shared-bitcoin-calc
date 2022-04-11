@@ -6,6 +6,7 @@ class USDtoBTC {
     if (amount >= 0) {
       _numUSD = amount;
     }
+    // Throw error if USD amount is negative
     else {
       throw ArgumentError();
     }
@@ -23,7 +24,6 @@ class USDtoBTC {
 }
 
 class BTCtoUSD {
- 
   double _numBTC;
 
   // Constructor is initialized with amount of BTC input
@@ -31,16 +31,10 @@ class BTCtoUSD {
     if (amount >= 0) {
       _numBTC = amount;
     }
-    else
-    {
+    // Throw error if BTC amount is negative
+    else {
       throw ArgumentError();
     }
-  }
-
-  // Conversion function returns amount of US Dollars
-  double conversion(double rate) {
-    return _numBTC * rate;
-
   }
 
   // Output stored value for bitcoin
@@ -48,4 +42,8 @@ class BTCtoUSD {
     return _numBTC;
   }
 
+  // Conversion function returns amount of US Dollars
+  double conversion(double rate) {
+    return _numBTC * rate;
+  }
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-// Import exchange tools classes package
+// Import exchange tools and API classes packages
 import 'package:bitcoin_calculator/models/exchange_tools.dart';
 import 'package:bitcoin_calculator/models/utils/conversionAPI.dart';
 import 'package:bitcoin_calculator/config/globals.dart';
