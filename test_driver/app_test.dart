@@ -56,8 +56,8 @@ void main() {
       final convertBtnFinder = find.byValueKey('USD-convert-button');
       
       await driver.tap(findUSDTextField);
-      await driver.enterText('45605.4');
-      await driver.waitFor(find.text('45605.4'));
+      await driver.enterText('42000.0');
+      await driver.waitFor(find.text('42000.0'));
       
       await driver.tap(convertBtnFinder);
 
@@ -121,7 +121,7 @@ void main() {
 
       final findOutputText = find.byValueKey('BTCtoUSD-output');
       
-      expect(await driver.getText(findOutputText), '45605.4');
+      expect(await driver.getText(findOutputText), '42000.0');
 
 
     });

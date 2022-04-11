@@ -26,12 +26,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  Future<String> futureConversion;
+  //Future<String> futureConversion;
 
   @override
   void initState() {
     super.initState();
-    futureConversion = BitcoinAPI.fetchDisplay(httpClient);
+    //futureConversion = BitcoinAPI.fetchDisplay(httpClient);
   }
 
 
@@ -48,15 +48,15 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FutureBuilder<String>(
-              future: futureConversion,
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  String rate = snapshot.data;
-                  return Text(rate, key: Key("joke-text"));
-                } else if (snapshot.hasError) {
-                  return Text("${snapshot.error}");
-                }}),
+            // FutureBuilder<String>(
+            //   future: futureConversion,
+            //   builder: (context, snapshot) {
+            //     if (snapshot.hasData) {
+            //       String rate = snapshot.data;
+            //       return Text(rate, key: Key("joke-text"));
+            //     } else if (snapshot.hasError) {
+            //       return Text("${snapshot.error}");
+            //     }}),
           // Button for user to go to USD to BTC converter
           ElevatedButton(
             key: Key("USDtoBTC-button"),
